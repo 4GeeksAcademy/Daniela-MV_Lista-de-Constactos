@@ -1,21 +1,31 @@
 import useGlobalReducer from "../hooks/useGlobalReducer"
 import { useNavigate } from "react-router-dom"
 
-const contacts = ({ }) => {
+const Contacts = ({contact }) => {
 
 
     return (
-        <div className="container">
-            <div className="card mb-3" style={{ maxWidth: "540px" }}>
+        <div className="container d-flex justify-content-center">
+            <div className="card mb-3" style={{ width: "90%" }}>
                 <div className="row g-0">
                     <div className="col-md-4">
-                        <img src="..." className="img-fluid rounded-start" alt="..." />
+                        <img src="https://cdn-icons-png.flaticon.com/512/5562/5562710.png" className="img-fluid rounded-start" alt="Contacto" style={{ width:"150px" ,height: "150px" }}/>
                     </div>
-                    <div className="col-md-8">
+                    <div className="col-md-8 text-start">
                         <div className="card-body">
-                            <h5 className="card-title">Card title</h5>
-                            <p className="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                            <p className="card-text"><small className="text-body-secondary">Last updated 3 mins ago</small></p>
+                            <h5 className="card-title">{contact.name}</h5>
+                            <p className="card-text">
+                                {contact.adress}
+                                <i class="bi bi-geo-alt-fill"></i>
+                            </p>
+                            <p className="card-text">
+                                {contact.telephone}
+                                <i class="bi bi-telephone-fill"></i>
+                            </p>
+                            <p className="card-text">
+                                {contact.mail}
+                                <i class="bi bi-envelope-at-fill"></i>
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -27,29 +37,7 @@ const contacts = ({ }) => {
 
 }
 
-
-// // function usuario(){
-// // 			fetch("https://playground.4geeks.com/todo/users/DannyMtz", {
-// // 				method: "GET"
-// // 			})
-// // 			.then((response) => {
-// // 				if (response.status === 404) {
-// // 					return fetch("https://playground.4geeks.com/todo/users/DannyMtz", {
-// // 						method: "POST",
-// // 						headers: {
-// // 							"Content-Type": "application/json"
-// // 						},
-// // 						body: JSON.stringify([])
-// // 					});
-// // 				} else {
-// // 					return Promise.resolve();
-// // 				}
-// // 			})
-// // 			.then(() => {
-// // 				console.log("Usuario creado");
-// // 			})
-// // 			.catch((error) => console.error("Error al crear usuario:", error));
-// // 		}
+export default Contacts;
 
 
 // <form className="row g-3">
