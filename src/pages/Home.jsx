@@ -30,6 +30,12 @@ export const Home = () => {
 			.catch((error) => console.error("Error al crear usuario:", error));
 	}
 
+	const getCotacts= async()=>{
+		try{
+			const response = await fetch("https://playground.4geeks.com/contact/DannyMtz/contacs")
+		}
+	}
+
 	useEffect{()=>{
 		user(),
 	}, []}
