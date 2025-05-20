@@ -8,34 +8,38 @@ export const Home = () => {
 	const { store, dispatch } = useGlobalReducer()
 
 	function user() {
-		fetch("https://playground.4geeks.com/contact/DannyMtz", {
+		fetch("https://playground.4geeks.com/contact/agendas/DaniMV", {
 			method: "GET"
 		})
 			.then((response) => {
 				if (response.status === 404) {
-					return fetch("https://playground.4geeks.com/contact/DannyMtz", {
+					return fetch("https://playground.4geeks.com/contact/agendas/DaniMV", {
 						method: "POST",
 						headers: {
 							"Content-Type": "application/json"
 						},
-						body: JSON.stringify([])
+						body: JSON.stringify({})
 					});
 				} else {
+					console.log("Usuario ya existe");
 					return Promise.resolve();
 				}
 			})
-			.then(() => {
-				console.log("Usuario creado");
+			.then((response) => {
+				if (response && !response.ok) {
+					throw new Error(`Error al crear el usuario: ${response.status}`);
+				}
+				console.log("Usuario creado correctamente");
 			})
 			.catch((error) => console.error("Error al crear usuario:", error));
 	}
 
 	useEffect(() => {
-		const getCotacts = async () => {
+		const getContacts = async () => {
 			try {
-				const response = await fetch("https://playground.4geeks.com/contact/DannyMtz/contacts")
+				const response = await fetch("https://playground.4geeks.com/contact/agendas/DaniMV/contacts")
 				if (!response.ok) {
-					throw new Error("HTTP error satatus: {response.status} ");
+					throw new Error(`HTTP error satatus: ${response.status}`);
 				}
 				const data = await response.json()
 				dispatch({
@@ -46,8 +50,8 @@ export const Home = () => {
 				console.error("Error fetching contacts", error)
 			}
 		}
+		getContacts()
 	}, [])
-
 
 	useEffect(() => {
 		user()
@@ -55,9 +59,9 @@ export const Home = () => {
 
 	return (
 		<div className="text-center mt-5">
-			{store.contact.map((value, index) => {
+			{store.contacts?.map((value, index) => {
 				return (
-					<Contacts key={index} contact={value} />
+					<Contacts key={index} contacts={value} />
 				)
 			})}
 

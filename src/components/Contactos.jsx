@@ -1,7 +1,6 @@
-import useGlobalReducer from "../hooks/useGlobalReducer"
-import { useNavigate } from "react-router-dom"
+import React from "react";
 
-const Contacts = ({contact }) => {
+const Contacts = ({contacts }) => {
 
 
     return (
@@ -13,18 +12,18 @@ const Contacts = ({contact }) => {
                     </div>
                     <div className="col-md-8 text-start">
                         <div className="card-body">
-                            <h5 className="card-title">{contact.name}</h5>
+                            <h5 className="card-title">{contacts.name}</h5>
                             <p className="card-text">
-                                {contact.adress}
-                                <i class="bi bi-geo-alt-fill"></i>
+                                <i className="bi bi-geo-alt-fill me-3"></i>
+                                {contacts.address}
                             </p>
                             <p className="card-text">
-                                {contact.telephone}
-                                <i class="bi bi-telephone-fill"></i>
+                               <i className="bi bi-telephone-fill me-3"></i>
+                                {contacts.phone}
                             </p>
                             <p className="card-text">
-                                {contact.mail}
-                                <i class="bi bi-envelope-at-fill"></i>
+                                <i className="bi bi-envelope-at-fill me-3"></i>
+                                {contacts.email}
                             </p>
                         </div>
                     </div>
