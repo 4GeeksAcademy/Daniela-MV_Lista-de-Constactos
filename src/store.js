@@ -23,6 +23,11 @@ case "get_contacts":
     ...store, contacts:action.payload
   };
 
+case "add_contact":
+  return{
+    ...store, contacts:[...store.contacts,action.payload]
+  };
+
 default:     
   throw Error('Unknown action.');
  }    
