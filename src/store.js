@@ -28,6 +28,15 @@ case "add_contact":
     ...store, contacts:[...store.contacts,action.payload]
   };
 
+case "update_contact":
+    return {
+        ...store,
+        contacts: store.contacts.map((c) =>
+            c.id === action.payload.id ? action.payload : c
+        )
+    };
+
+
 default:     
   throw Error('Unknown action.');
  }    

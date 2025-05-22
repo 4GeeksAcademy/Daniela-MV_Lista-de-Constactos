@@ -6,7 +6,7 @@ const AddContacts = () => {
     const navigate = useNavigate();
     const { store, dispatch } = useGlobalReducer();
     const [form, setForm] = useState({
-        full_name: "",
+        name: "",
         address: "",
         phone: "",
         email: "",
@@ -19,10 +19,15 @@ const AddContacts = () => {
     const FormSubmit = (e) => {
     e.preventDefault()
 
+    if (!form.name || !form.email || !form.phone || !form.address) {
+    alert("Todos los campos son obligatorios");
+    return;
+}
+
     fetch("https://playground.4geeks.com/contact/agendas/DaniMV/contacts", {
         method: "POST",
         headers: {
-            "Content-type": "aplication/json",
+            "Content-type": "application/json",
         },
         body: JSON.stringify({
             ...form, agenda_slug: "DaniMV"})
@@ -48,7 +53,7 @@ return (
     <form className="row g-3" onSubmit={FormSubmit}>
          <div className="col-10">
             <label htmlFor="inputName" className="form-label">Name</label>
-            <input type="text" className="form-control" id="inputName" placeholder="Nombre de contacto" value={form.full_name} onChange={formChange} name="full_name"/>
+            <input type="text" className="form-control" id="inputName" placeholder="Nombre de contacto" value={form.name} onChange={formChange} name="name"/>
         </div>
         <div className="col-md-10">
             <label htmlFor="inputEmail4" className="form-label">Email</label>
@@ -73,4 +78,3 @@ return (
 }
 
 export default AddContacts;
-
