@@ -31,10 +31,11 @@ case "add_contact":
 case "update_contact":
     return {
         ...store,
-        contacts: store.contacts.map((c) =>
-            c.id === action.payload.id ? action.payload : c
+        contacts: store.contacts.map(contact =>
+            contact.id === action.payload.id ? action.payload : contact
         )
     };
+
 
 
 default:     

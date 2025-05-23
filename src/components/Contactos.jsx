@@ -1,7 +1,48 @@
 import React from "react";
+import { Link } from "react-router-dom";
+import useGlobalReducer from "../hooks/useGlobalReducer";
+
 
 const Contacts = ({ contacts }) => {
+    const {dispatch}=useGlobalReducer();
 
+    
+const deleteContact = () => {
+
+    fetch(`https://playground.4geeks.com/contact/agendas/DaniMV/contacts/${contacts.id}`, {
+        method: "DELETE"
+    })
+        .then((response) => {
+            if (!response.ok) {
+                throw new Error("Error al borrar el contacto");
+            }
+            return fetch("https://playground.4geeks.com/contact/agendas/DaniMV/contacts");
+        })
+        .then((response) => response.json())
+        .then((data) => {
+            dispatch({
+                type: "get_contacts",
+                payload: data.contacts
+            });
+        })
+        .catch((error) => console.error("Error eliminando contacto:", error));
+};
+    
+    // const deleteContact = () =>{
+
+    //    fetch(`https://playground.4geeks.com/contact/agendas/DaniMV/contacts/${contacts.id}`,{
+    //        method: "DELETE"
+    //    })
+    //    .then ((response) =>{
+    //     if (!response.ok){
+    //         throw new Error("Error al borrar el contacto");
+    //     } dispatch ({
+    //         type:"delete_contact",
+    //         payload:contacts.id
+    //     });
+    //    })
+    //    .catch((error)=> console.error("Error de eliminado de contacto:", error ));
+    // }
     
 
     return (
@@ -28,14 +69,14 @@ const Contacts = ({ contacts }) => {
                             </p>
                         </div>
                         <div className="Buttons m-3">
-                            <button type="button" className="btn btn-outline-primary me-3"> 
+                            <button type="button" className="btn btn-outline-primary me-3" onClick={deleteContact}> 
                                 <i className="bi bi-trash-fill"></i>
                             </button>
-                            <Link to="/form" state={{ contact: contacto }}>Editar
+                            <Link to={`/edit/${contacts.id}`}>
                             <button type="button" className="btn btn-outline-primary"> 
                                <i className="bi bi-pencil-fill"></i>
                             </button>
-                            </Link>
+                            </Link> 
                            
                             
                         </div>

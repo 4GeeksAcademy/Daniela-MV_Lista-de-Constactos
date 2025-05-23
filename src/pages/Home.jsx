@@ -35,6 +35,10 @@ export const Home = () => {
 	}
 
 	useEffect(() => {
+		user()
+	}, [])
+
+	useEffect(() => {
 		const getContacts = async () => {
 			try {
 				const response = await fetch("https://playground.4geeks.com/contact/agendas/DaniMV/contacts")
@@ -53,17 +57,14 @@ export const Home = () => {
 		getContacts()
 	}, [])
 
-	useEffect(() => {
-		user()
-	}, [])
-
 	return (
 		<div className="text-center mt-5">
+
 			{store.contacts?.map((value, index) => {
 				return (
 					<Contacts key={index} contacts={value} />
 				)
-			})}
+			})} 
 
 		</div>
 	);
